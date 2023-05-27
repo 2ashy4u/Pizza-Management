@@ -1,0 +1,45 @@
+<html>
+<head>
+  <title>Order Menu</title>
+  <link rel="stylesheet" type="text/css" href="static/style2.css" />
+</head>
+<body>
+  <img src="/static/assets/Papas_logo.png" alt="Papa's Pizza">
+  <h1>Order Menu</h1>
+  <a class ="logout-link" href="{{ url_for('logout') }}"><button>Logout</button></a>
+  {% block content %}
+    <div class="grid-container">
+      {% for pizza in pizzas %}
+        <div class="row">
+          <div>{{ pizza.name }}</div>
+          <div>${{ pizza.price }}</div>
+          <div><img src="{{ url_for('static', filename='assets/' + pizza.name.lower() + '.png') }}" alt="{{ pizza.name }}" width="100" height="100"></div>
+          <div>
+            <form action="{{ url_for('add_to_cart', pizza_id=pizza.id) }}" method="post">
+              <button type="submit">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Add this snippet to display cart items in order_menu.html -->
+    <div id="cart">
+      <h3>Your Cart</h3>
+      <ul>
+        {% for item in cart_items %}
+          <li>{{ item.pizza.name }} - Quantity: {{ item.quantity }} - Price: ${{ item.pizza.price * item.quantity }}</li>
+          <form action="{{ url_for('remove_from_cart', pizza_id=item.pizza_id) }}" method="post">
+            <button type="submit">Remove</button>
+          </form>
+        {% endfor %}
+      </ul>
+      <h4>Total Cost: ${{ total_cost }}</h4>
+      <form action="{{ url_for('checkout') }}" method="post">
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  {% endblock %}
+
+</body>
+</html>

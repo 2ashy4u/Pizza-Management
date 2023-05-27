@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>Manager Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <img src="/static/assets/Papas_logo.png" alt="Papa's Pizza">
+    <h1>Manager Dashboard</h1>
+    <a class ="logout-link" href="{{ url_for('logout') }}"><button>Logout</button></a>
+  </head>
+  <body>
+    <h1>All Employees:</h1>
+    {% block content %}
+  <h1>Employees</h1>
+  <form action="{{ url_for('delete_employees') }}" method="post">
+    <table>
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Name</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for employee in employees_data %}
+          <tr>
+            <td>
+              <input type="checkbox" name="selected_employees" value="{{ employee.id }}">
+            </td>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.phone }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <input type="submit" value="Delete Selected Employees">
+  </form>
+{% endblock %}
+        <a class ="employee_shifts-link" href="{{ url_for('all_employee_shifts') }}"><button>Go Back</button></a>
+        
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <img src="static/assets/Papas_logo.png" alt="Papa's Pizza">
+    <h1>Add a Shift</h1>
+  </head>
+  <body>
+
+{% block content %}
+<h1>Assign Shift</h1>
+<form action="{{ url_for('add_shift') }}" method="post">
+  <label for="employee_name">Employee Name:</label>
+  <input type="text" id="employee_name" name="employee_name" required><br><br>
+  
+  <label for="shift_date">Shift Date (YYYY-MM-DD):</label>
+  <input type="date" id="shift_date" name="shift_date" required><br><br>
+  
+  <label for="start_time">Start Time (HH:MM):</label>
+  <input type="time" id="start_time" name="start_time" required><br><br>
+  
+  <label for="end_time">End Time (HH:MM):</label>
+  <input type="time" id="end_time" name="end_time" required><br><br>
+  
+  <input type="submit" value="Assign Shift">
+</form>
+{% endblock %}
+    <a class ="logout-link" href="{{ url_for('logout') }}"><button>Logout</button></a>
+    <a class ="employee_shifts-link" href="{{ url_for('all_employee_shifts') }}"><button>Go Back</button></a>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Orders</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <img src="/static/assets/Papas_logo.png" alt="Papa's Pizza">
+  </head>
+  <body>
+    {% block content %}
+      <h1>Orders</h1>
+      <h1></h1>
+      <form action="{{ url_for('update_orders') }}" method="post">
+        <table>
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Order Date</th>
+              <th>Items</th>
+              <th>Complete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in orders %}
+              <tr>
+                <td>{{ order.customer.name }}</td>
+                <td>{{ order.customer.address }}</td>
+                <td>{{ order.customer.phone }}</td>
+                <td>{{ order.order_date }}</td>
+                <td>
+                  <ul>
+                    {% for item in order.cart %}
+                      <li>{{ item.pizza.name }} - Quantity: {{ item.quantity }}</li>
+                    {% endfor %}
+                  </ul>
+                </td>
+                <td><input type="checkbox" name="completed_orders" value="{{ order.id }}"></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <button type="submit">Update Orders</button>
+      </form>
+      <h1></h1>
+      <a href="{{ url_for('employee_shifts') }}">View My Shifts</a>
+
+      <a class ="logout-link" href="{{ url_for('logout') }}"><button>Logout</button></a>
+    {% endblock %}
+
+  </body>
+</html>

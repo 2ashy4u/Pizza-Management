@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>Papa's Pizza</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css" />
+  </head>
+  <body>
+    {% block content %}
+      <img src="static/assets/Papas_logo.png" alt="Papa's Pizza">
+      <h1>Please Sign Up or Login to Order at Papa's Pizza</h1>
+      <h5>WE ONLY ACCEPT CASH, NO CARD</h5>
+      <form method="POST">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name">
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email">
+        </div>
+        <div>
+          <label for="address">Address:</label>
+          <input type="text" name="address" id="address">
+        </div>
+        <div>
+          <label for="phone">Phone:</label>
+          <input type="tel" name="phone" id="phone">
+        </div>
+        <div>
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username">
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password">
+        </div>
+        <button type="submit">Sign Up</button>
+
+      </form>
+      <a class ="login-link" href="{{ url_for('login') }}"><button>Already have an account? Login!</button></a>
+
+    {% endblock %}
+    
+  </body>
+
+</html>

@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>Manager Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <img src="/static/assets/Papas_logo.png" alt="Papa's Pizza">
+    <h1>Manager Dashboard</h1>
+    <a class ="logout-link" href="{{ url_for('logout') }}"><button>Logout</button></a>
+  </head>
+  <body>
+    <div class="grid-container">
+    <h7>Welcome, Papa!</h7>
+    {% block content %}
+      <h7>Orders</h7>
+        <table>
+          <thead>
+            <tr>
+              <th>Employee Name</th>
+              <th>Date</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for shift in shifts_data %}
+              <tr>
+                <td>{{ shift.employee_name }}</td>
+                <td>{{ shift.date }}</td>
+                <td>{{ shift.start_time }}</td>
+                <td>{{ shift.end_time }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+        {% endblock %}
+        <a class ="add_shift-link" href="{{ url_for('add_shift') }}"><button>Add Shift</button></a>
+        <a class ="current_employees-link" href="{{ url_for('current_employees') }}"><button>View All Employees</button></a>
+  </body>
+</html>

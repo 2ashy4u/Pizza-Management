@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>Shifts</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <img src="/static/assets/Papas_logo.png" alt="Papa's Pizza">
+  </head>
+  <body>
+
+{% block content %}
+    <h2>{{ employee_name }}'s Shifts</h2>
+    <h1></h1>
+    <div class="grid-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shift in shifts_data %}
+                <tr>
+                    <td>{{ shift.date }}</td>
+                    <td>{{ shift.start_time }}</td>
+                    <td>{{ shift.end_time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <h1></h1>
+    <a href="{{ url_for('customer_orders') }}">Back to Orders</a>
+    <a class ="logout-link" href="{{ url_for('logout') }}"><button>Logout</button></a>
+{% endblock %}
+  </body>
+</html>
